@@ -1,13 +1,13 @@
 import csv
 import requests
 
-with open('example.csv', newline='') as csvfile:
+with open('import_csv_template.csv', newline='') as csvfile:
     reader = csv.DictReader(csvfile)
-    url = "https://demokit.okta.com/api/v1/users?activate=false"
+    url = "https://example.okta.com/api/v1/users?activate=false"
     headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': 'SSWS 00d5uThYKGfoQ6boWyqMZIH4TxSAGvbyMemazNA9tf'
+        'Authorization': 'SSWS XXX'
     }
 
     for row in reader:
@@ -37,16 +37,6 @@ with open('example.csv', newline='') as csvfile:
             }
         }
 
-        # payloadString = str(payload)
-        # payload = "{\n  \"profile\": {\n    \"firstName\": " + row[firsName] + ",\n    \"lastName\": \"Brock\",\n    \"email\": \"isaac@pretendco.com\",\n    \"login\": \"isaac@pretendco.com\",\n    \"shortName\": \"isaac\"\n  },\n  \"credentials\": {\n    \"password\" : { \"value\": \"{{Apple123!}}\" }\n  }\n}"
-
-        # # print(row['primaryPhone'], row['department'])
-        # # print(payloadString)
         response = requests.request("POST", url, headers=headers, json = payload)
-
-
-
-
-# response = requests.request("POST", url, headers=headers, data = payload)
 
 print(response.text.encode('utf8'))
